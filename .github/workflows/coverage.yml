@@ -29,7 +29,6 @@ jobs:
           LLVM_PROFILE_FILE: 'target/debug/coverage/openmls-%p-%m.profraw'
           RUSTFLAGS: '-Cinstrument-coverage -Cpanic=abort -Zpanic_abort_tests'
           RUSTDOCFLAGS: '-Cinstrument-coverage -Cpanic=abort -Zpanic_abort_tests -Z unstable-options --persist-doctests target/debug/'
-          LIBCRUX_DISABLE_SIMD256: '1'
 
       - name: Run grcov
         id: coverage

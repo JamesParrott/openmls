@@ -9,16 +9,11 @@ tremendous care, and is not what the average OpenMLS consumer wants to (or shoul
 do, we provide two implementations that can be used.
 
 - [Rust Crypto]
-- [Libcrux Crypto]
 
 **Rust Crypto Provider**
 The go-to default at the moment is an implementation using commonly used, native
 Rust crypto implementations.
 
-**Libcrux Crypto Provider**
-A crypto provider backed by the high-assurance cryptography library [libcrux].
-Currently only supports relatively modern x86 and amd64 CPUs, as it requires
-AES-NI, SIMD and AVX.
 
 ## The Traits
 
@@ -140,6 +135,5 @@ sufficient to do a new implementation of the `StorageProvider` trait and
 combine it with one of the provided crypto and randomness trait implementations.
 
 [rust crypto]: https://crates.io/crates/openmls_rust_crypto
-[libcrux crypto]: https://crates.io/crates/openmls_libcrux_crypto
 [openmls traits crate]: https://crates.io/crates/openmls_traits
 [rand crate]: https://crates.io/crates/rand

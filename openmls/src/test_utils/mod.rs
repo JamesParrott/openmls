@@ -185,12 +185,5 @@ pub(crate) fn generate_group_candidate(
     }
 }
 
-#[cfg(all(
-    feature = "libcrux-provider",
-    not(any(
-        target_arch = "wasm32",
-        all(target_arch = "x86", target_os = "windows")
-    ))
-))]
-pub type OpenMlsLibcrux = openmls_libcrux_crypto::Provider;
+
 pub type OpenMlsRustCrypto = openmls_rust_crypto::OpenMlsRustCrypto;

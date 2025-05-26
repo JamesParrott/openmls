@@ -339,76 +339,9 @@ fn generate_kats(ciphersuite: Ciphersuite, provider: &Provider) {
     helper_generate_kat::<Provider>(ciphersuite);
 }
 
-#[test]
-#[ignore]
-#[cfg(not(all(
-    feature = "libcrux-provider",
-    not(any(
-        target_arch = "wasm32",
-        all(target_arch = "x86", target_os = "windows")
-    ))
-)))]
-fn write_kats() {
-    // setup
-    let rustcrypto_provider = openmls_rust_crypto::OpenMlsRustCrypto::default();
 
-    // make a list of all supported ciphersuites
-    let ciphersuites = rustcrypto_provider.crypto().supported_ciphersuites();
 
-    // generate the kat data
-    let kat_data = ciphersuites
-        .into_iter()
-        .map(|ciphersuite| {
-            let (group_id, storages) =
-                helper_generate_kat::<openmls_rust_crypto::OpenMlsRustCrypto>(ciphersuite);
 
-            (ciphersuite, group_id, storages)
-        })
-        .collect();
-
-    // encode and write to disk
-    helper_write_kats(kat_data);
-}
-
-#[test]
-#[ignore]
-#[cfg(all(
-    feature = "libcrux-provider",
-    not(any(
-        target_arch = "wasm32",
-        all(target_arch = "x86", target_os = "windows")
-    ))
-))]
-fn write_kats() {
-    // setup
-    let libcrux_provider = openmls_libcrux_crypto::Provider::default();
-    let rustcrypto_provider = openmls_rust_crypto::OpenMlsRustCrypto::default();
-
-    // make a list of all supported ciphersuites
-    let mut ciphersuites = libcrux_provider.crypto().supported_ciphersuites();
-    for ciphersuite in rustcrypto_provider.crypto().supported_ciphersuites() {
-        if !ciphersuites.contains(&ciphersuite) {
-            ciphersuites.push(ciphersuite);
-        }
-    }
-
-    // generate the kat data
-    let kat_data = ciphersuites
-        .into_iter()
-        .map(|ciphersuite| {
-            let (group_id, storages) = if libcrux_provider.crypto().supports(ciphersuite).is_ok() {
-                helper_generate_kat::<openmls_libcrux_crypto::Provider>(ciphersuite)
-            } else {
-                helper_generate_kat::<openmls_rust_crypto::OpenMlsRustCrypto>(ciphersuite)
-            };
-
-            (ciphersuite, group_id, storages)
-        })
-        .collect();
-
-    // encode and write to disk
-    helper_write_kats(kat_data);
-}
 
 fn helper_write_kats(kat_data: Vec<(Ciphersuite, GroupId, Vec<Vec<u8>>)>) {
     let base64_engine = base64::engine::GeneralPurpose::new(

@@ -8,7 +8,6 @@ Most operations in OpenMLS require a `provider` object that provides all require
 Currently, there are two implementations available:
 
 - one through the [openmls_rust_crypto] crate.
-- one through the [openmls_libcrux_crypto] crate.
 
 Thus, you can create the `provider` object for the following examples using ...
 
@@ -18,4 +17,3 @@ Thus, you can create the `provider` object for the following examples using ...
 
 [`openmlscryptoprovider`]: https://docs.rs/openmls/latest/openmls/prelude/trait.OpenMlsCryptoProvider.html
 [openmls_rust_crypto]: https://crates.io/crates/openmls_rust_crypto
-[openmls_libcrux_crypto]: https://crates.io/crates/openmls_libcrux_crypto

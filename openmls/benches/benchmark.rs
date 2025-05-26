@@ -277,10 +277,6 @@ fn kp_bundle_rust_crypto(c: &mut Criterion) {
 
 fn criterion_benchmark(c: &mut Criterion) {
     kp_bundle_rust_crypto(c);
-    criterion_key_package(c, &openmls_libcrux_crypto::Provider::default());
-    create_welcome(c, &openmls_libcrux_crypto::Provider::default());
-    join_group(c, &openmls_libcrux_crypto::Provider::default());
-    create_commit(c, &openmls_libcrux_crypto::Provider::default());
 }
 
 criterion_group!(benches, criterion_benchmark);
